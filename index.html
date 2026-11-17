@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Game Dev Studio</title>
+    <style>
+        /* Base Reset */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        /* Modern English Font */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap');
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #0b0c10;
+            color: #c5c6c7;
+            line-height: 1.6;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        :root {
+            --primary: #8e7fd2; /* Gaming Purple */
+            --secondary: #66fcf1; /* Neon Cyan */
+            --dark-bg: #1f2833;
+        }
+
+        h1, h2, h3 { color: #ffffff; }
+
+        /* Hero / Team Intro Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: radial-gradient(circle at top, var(--dark-bg) 0%, #0b0c10 100%);
+            padding: 2rem;
+            position: relative;
+        }
+        
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            font-weight: 300;
+            max-width: 650px;
+            margin-bottom: 2rem;
+            color: #a0a4a8;
+        }
+
+        /* Social / Store Links under Description */
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2.5rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .social-btn {
+            padding: 0.6rem 1.4rem;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50px;
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .social-btn:hover {
+            border-color: var(--secondary);
+            color: var(--secondary);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(102, 252, 241, 0.2);
+        }
+
+        /* Floating Animation */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
+        /* Scroll Reveal Animation */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Section Layout */
+        section { padding: 6rem 2rem; max-width: 1200px; margin: 0 auto; }
+        .section-title {
+            text-align: center;
+            font-size: 2.8rem;
+            font-weight: 800;
+            margin-bottom: 3.5rem;
+            color: var(--secondary);
+            text-shadow: 0 0 10px rgba(102, 252, 241, 0.2);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* Portfolio Grid */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
+        }
+
+        /* Glassmorphism Cards */
+        .card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 1.5rem;
+            transition: all 0.4s ease;
+            backdrop-filter: blur(10px);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(45deg, transparent, rgba(142, 127, 210, 0.05), transparent);
+            transform: translateX(-100%);
+            transition: 0.6s;
+        }
+
+        .card:hover::before { transform: translateX(100%); }
+        
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(142, 127, 210, 0.15);
+            border-color: rgba(142, 127, 210, 0.5);
+        }
+
+        .card-img {
+            width: 100%;
+            height: 220px;
+            background: #151a22;
+            border-radius: 12px;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+        }
+
+        .card h3 { margin-bottom: 1rem; font-size: 1.5rem; font-weight: 600; }
+        .card p { font-size: 0.95rem; font-weight: 300; margin-bottom: 2rem; flex-grow: 1; color: #9a9eab; }
+        
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 1.8rem;
+            background: transparent;
+            color: var(--secondary);
+            text-decoration: none;
+            border: 2px solid var(--secondary);
+            border-radius: 8px;
+            text-align: center;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+        }
+        
+        .btn:hover {
+            background: var(--secondary);
+            color: #0b0c10;
+            box-shadow: 0 0 15px rgba(102, 252, 241, 0.4);
+        }
+
+        /* Hero Button Override */
+        .hero .btn { 
+            font-size: 1.1rem; 
+            padding: 1rem 2.5rem; 
+            border-color: var(--primary); 
+            color: var(--primary); 
+        }
+        .hero .btn:hover { 
+            background: var(--primary); 
+            color: #fff; 
+            box-shadow: 0 0 20px rgba(142, 127, 210, 0.4); 
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2.5rem 2rem;
+            background: rgba(0, 0, 0, 0.3);
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            margin-top: 4rem;
+            font-size: 0.9rem;
+            color: #7a7e85;
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Header / Team Intro -->
+    <header class="hero">
+        <h1>[Your Studio Name]</h1>
+        <p>We are an independent, creative game development team crafting new worlds with passion and code. Our mission is to build fun, fast, and unforgettable experiences for players everywhere.</p>
+        
+        <!-- Links under description -->
+        <div class="social-links">
+            <a href="https://assetstore.unity.com/" class="social-btn" target="_blank">🧊 Unity Asset Store</a>
+            <a href="https://discord.gg/yourlink" class="social-btn" target="_blank">💬 Discord</a>
+            <a href="mailto:your@email.com" class="social-btn">✉️ Email Us</a>
+        </div>
+
+        <a href="#portfolio" class="btn">Explore Portfolio</a>
+    </header>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio">
+        <h2 class="section-title fade-in">Our Projects</h2>
+        <div class="portfolio-grid">
+            
+            <!-- Game 1 -->
+            <div class="card fade-in">
+                <div class="card-img">🍔</div>
+                <h3>Restaurant Simulator</h3>
+                <p>A fast-paced management game featuring deep mechanics like "Fast Cooking", "Burn Prevention", and handling "VIP Customers". Built with a modern, responsive UI.</p>
+                <a href="https://yourlink.com/project1" class="btn" target="_blank">Open</a>
+            </div>
+
+            <!-- Game 2 -->
+            <div class="card fade-in">
+                <div class="card-img">⚔️</div>
+                <h3>Epic Battle Project</h3>
+                <p>A highly optimized 2D action game featuring smooth animations, engaging combat loops, and a lightweight engine designed for lag-free performance.</p>
+                <a href="https://yourlink.com/project2" class="btn" target="_blank">Open</a>
+            </div>
+
+            <!-- Game 3 -->
+            <div class="card fade-in">
+                <div class="card-img">🧩</div>
+                <h3>Minimalist Puzzle</h3>
+                <p>A brain-teaser focusing on clean, minimal design and stunning visuals. It features hundreds of challenging levels and creative mechanics.</p>
+                <a href="https://yourlink.com/project3" class="btn" target="_blank">Open</a>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2026 [Your Studio Name]. Developed with ❤️</p>
+    </footer>
+
+    <!-- Scroll Animation Script -->
+    <script>
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.15 });
+
+        document.querySelectorAll('.fade-in').forEach(element => {
+            observer.observe(element);
+        });
+    </script>
+</body>
+</html>
